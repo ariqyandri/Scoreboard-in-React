@@ -46,6 +46,13 @@ export default function Scoreboard() {
     setPlayers(randomizedScore);
   };
 
+  const removedPlayer = (id) => {
+    const removedPlayer = players.filter((player) => {
+      return player.id !== id;
+    });
+    setPlayers(removedPlayer);
+  };
+
   const onClickRandomize = () => {
     const resetScore = players.map((p) => {
       return { ...p, score: Math.floor(Math.random() * 100 + 1) };
@@ -60,6 +67,9 @@ export default function Scoreboard() {
     setPlayers(resetScore);
   };
 
+  const onClickRemove = () => {
+    setPlayers([]);
+  };
   const addPlayer = (name) => {
     console.log("Let's add a new player with the name:", name);
     const newPlayer = { id: players.length + 1, name: name, score: 0 };
@@ -90,6 +100,12 @@ export default function Scoreboard() {
           </button>
         </h5>
         <div style={{ width: "20px" }}></div>
+        <h5>
+          <button className="card removebg" onClick={onClickRemove}>
+            Remove All Players
+          </button>
+        </h5>
+        <div style={{ width: "20px" }}></div>
         <AddPlayerForm addPlayer={addPlayer} />
       </div>
       <div>
@@ -103,6 +119,7 @@ export default function Scoreboard() {
               incrementScore={incrementScore}
               decrementScore={decrementScore}
               randomizedScore={randomizedScore}
+              removedPlayer={removedPlayer}
             />
           );
         })}

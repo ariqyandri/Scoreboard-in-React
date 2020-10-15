@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 export default function AddPlayerForm(props) {
   const onClickRegister = (event) => {
-    props.addPlayer(name);
     event.preventDefault();
+    props.addPlayer(name);
     return setName("");
   };
 
@@ -15,6 +15,15 @@ export default function AddPlayerForm(props) {
     setName(event.target.value);
   };
 
+  const onKeyRegister = (event) => {
+    event.preventDefault();
+    if (event.key === "Enter") {
+      console.log("ennnenenene");
+      props.addPlayer(name);
+      return setName("");
+    }
+  };
+
   return (
     <div>
       <h5 className="row">
@@ -23,6 +32,7 @@ export default function AddPlayerForm(props) {
           type="text"
           placeholder="Add New Name"
           onChange={nameInput}
+          onKeyDown={onKeyRegister}
           value={name}
         />
         <button className="card" onClick={onClickRegister}>
