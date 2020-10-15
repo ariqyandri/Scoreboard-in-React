@@ -38,12 +38,19 @@ export default function Scoreboard() {
   };
 
   const randomizedScore = (id) => {
-    const decreasedScore = players.map((player) => {
+    const randomizedScore = players.map((player) => {
       return player.id === id
         ? { ...player, score: Math.floor(Math.random() * 100 + 1) }
         : player;
     });
-    setPlayers(decreasedScore);
+    setPlayers(randomizedScore);
+  };
+
+  const onClickRandomize = () => {
+    const resetScore = players.map((p) => {
+      return { ...p, score: Math.floor(Math.random() * 100 + 1) };
+    });
+    setPlayers(resetScore);
   };
 
   const onClickReset = () => {
@@ -63,17 +70,28 @@ export default function Scoreboard() {
   return (
     <div className="Scoreboard">
       <h1 className="card-title mb-4 mt-4">ScoreBoard!!!</h1>
-      <p>
-        <select className="card" onChange={change_sorting} value={sort_by}>
-          <option value="score">Sort by score</option>
-          <option value="name">Sort by name</option>
-        </select>
-      </p>
-      <p>
-        <button className="card" onClick={onClickReset}>
-          Reset score
-        </button>
-      </p>
+      <div className="row">
+        <h5>
+          <select className="card" onChange={change_sorting} value={sort_by}>
+            <option value="score">Sort by score</option>
+            <option value="name">Sort by name</option>
+          </select>
+        </h5>
+        <div style={{ width: "20px" }}></div>
+        <h5>
+          <button className="card" onClick={onClickReset}>
+            Reset score
+          </button>
+        </h5>
+        <div style={{ width: "20px" }}></div>
+        <h5>
+          <button className="card" onClick={onClickRandomize}>
+            Randomize score
+          </button>
+        </h5>
+        <div style={{ width: "20px" }}></div>
+        <AddPlayerForm addPlayer={addPlayer} />
+      </div>
       <div>
         {players_sorted.map((player) => {
           return (
@@ -89,7 +107,6 @@ export default function Scoreboard() {
           );
         })}
       </div>
-      <AddPlayerForm addPlayer={addPlayer} />
     </div>
   );
 }

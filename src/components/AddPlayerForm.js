@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
 export default function AddPlayerForm(props) {
-  const onClickRegister = () => {
+  const onClickRegister = (event) => {
     props.addPlayer(name);
+    event.preventDefault();
     return setName("");
   };
 
@@ -15,20 +16,19 @@ export default function AddPlayerForm(props) {
   };
 
   return (
-    <div className="AddPlayerForm">
-      <h3>
+    <div>
+      <h5 className="row">
         <input
           className="card"
           type="text"
-          placeholder="New Name"
+          placeholder="Add New Name"
           onChange={nameInput}
+          value={name}
         />
-      </h3>
-      <h4>
         <button className="card" onClick={onClickRegister}>
           Add
         </button>
-      </h4>
+      </h5>
     </div>
   );
 }

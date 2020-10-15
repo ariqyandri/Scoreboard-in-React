@@ -23,9 +23,11 @@ export default function Player(props) {
           <button className="card mb-4" onClick={onClickDecrement}>
             -
           </button>
+          <p style={{ width: "15px" }}></p>
           <button className="card mb-4" onClick={onClickIncrement}>
             +
           </button>
+          <p style={{ width: "15px" }}></p>
           <button className="card mb-4" onClick={onClickRandomize}>
             Randomize
           </button>
@@ -36,5 +38,5 @@ export default function Player(props) {
         />
       </div>
     </div>
-  );
+);
 }
